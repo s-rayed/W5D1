@@ -14,3 +14,11 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+
+  $("select#search_duration").change(function(){
+    $(this).closest("form").submit();
+  });
+
+});

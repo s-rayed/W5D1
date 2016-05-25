@@ -1,7 +1,11 @@
 class MoviesController < ApplicationController
 
   def index
-    @movies = Movie.page(params[:page]).per(5)
+    @movies = Movie.all
+    @movies = @movies.search(params[:search_title]) if params[:search_title]
+    @movies = @movies.search(params[:search_dir]) if params[:search_dir]
+    @movies = @movies.search_duration(params[:search_duration]) if params[:search_duration]
+    @movies = @movies.page(params[:page]).per(5)
   end
 
   def show

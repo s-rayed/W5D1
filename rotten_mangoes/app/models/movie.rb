@@ -25,6 +25,26 @@ class Movie < ActiveRecord::Base
     reviews.sum(:rating_out_of_ten)/reviews.size unless reviews.nil?
   end
 
+  def self.search(search)
+    if search
+      where('title LIKE :search OR director LIKE :search', {search: "%#{search}%"})
+    else
+      scoped
+    end
+  end
+
+  def self.search_duration(duration)
+    if duration == "Under 90 minutes"
+      where('runtime_in_minutes < 90')
+    elsif duration == "90 - 120 minutes"
+      where('runtime_in_minutes >= 90 AND runtime_in_minutes <= 120')
+    elsif duration == "Over 120 minutes"
+      where('runtime_in_minutes > 120')
+    elsif duration == "Select" 
+      scoped
+    end 
+  end
+
   protected
 
   def release_date_is_in_the_past
