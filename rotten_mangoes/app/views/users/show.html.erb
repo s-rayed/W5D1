@@ -1,0 +1,27 @@
+<%= link_to "Back to all movies", movies_path %><br/>
+<table border="1">
+<th colspan="2"><center>USER DETAILS</center></th>
+<tr>
+  <td><center>NAME</center></td>
+  <td><center>EMAIL</center></td>
+</tr>
+<tr>
+<td> <%= @user.firstname + " " + @user.lastname %></td>
+<td><%= @user.email %></td>
+</tr>
+
+
+>
+
+</table>
+
+
+
+
+<br>
+<% @user.reviews.each do |review| %>
+<p>Movie Title: <%= link_to review.movie.title, movie_path(review.movie_id) %></p>
+<p>Review Text: <%= review.text %></p>
+<p>Review Rating: <%= review.rating_out_of_ten %></p>
+<br>
+<% end %>

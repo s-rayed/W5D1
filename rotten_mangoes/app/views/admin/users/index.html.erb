@@ -1,0 +1,28 @@
+<h1> All Users </h1>
+<%= paginate @users %>
+
+<%= link_to "Create a new user", new_user_path %>
+
+<table border="1">
+<tbody>
+  <tr>
+  <td>First Name</td>
+  <td>Last Name</td>
+  <td>Email</td>
+  <td>Admin?</td>
+  <td>Edit<td>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+  <td><%= user.firstname %></td>
+  <td><%= user.lastname %></td>
+  <td><%= user.email %></td>
+  <td><%= user.admin? %></td>
+  <td>EDIT</td>
+  <td><button><%= link_to "delete", admin_user_path(user), :method => :delete, :"data-confirm" => "Are you sure?" %></button></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
