@@ -8,6 +8,8 @@ class MoviesController < ApplicationController
     @movies = @movies.page(params[:page]).per(5)
   end
 
+
+
   def show
     @movie = Movie.find(params[:id])
   end

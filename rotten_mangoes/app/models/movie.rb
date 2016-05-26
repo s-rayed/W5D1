@@ -1,5 +1,7 @@
 class Movie < ActiveRecord::Base
 
+  scope :search, -> (search) { where('title LIKE :search OR director LIKE :search', {search: "%#{search}%"})}
+
   has_many :reviews
 
   validates :title,
@@ -23,14 +25,6 @@ class Movie < ActiveRecord::Base
 
   def review_average
     reviews.sum(:rating_out_of_ten)/reviews.size unless reviews.nil?
-  end
-
-  def self.search(search)
-    if search
-      where('title LIKE :search OR director LIKE :search', {search: "%#{search}%"})
-    else
-      scoped
-    end
   end
 
   def self.search_duration(duration)
