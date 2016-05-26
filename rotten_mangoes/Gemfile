@@ -40,6 +40,10 @@ gem 'rmagick'
 
 gem 'kaminari'
 
+gem 'figaro'
+
+gem 'mailgun-ruby', '~>1.0.2', require: 'mailgun'
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

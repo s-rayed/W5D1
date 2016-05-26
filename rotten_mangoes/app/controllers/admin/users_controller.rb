@@ -8,7 +8,19 @@ class Admin::UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to admin_users_path
+    UserDeleteMailer.admin_delete_user_email(@user).deliver
+    respond_to do |format|
+      if @user
+        format.html { redirect_to admin_users_path }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      else
+      # Sends email to user when user is created.
+      format.html { redirect_to @user, notice: 'User was deleted by admin.' }
+      format.json { render :show, status: :deleted, location: @user }
+      redirect_to admin_users_path
+      end
+    end
+  
   end
 
 end
